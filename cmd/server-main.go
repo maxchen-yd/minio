@@ -548,13 +548,13 @@ func serverMain(ctx *cli.Context) {
 	}
 
 	// Check for updates in non-blocking manner.
-	go func() {
-		if !globalCLIContext.Quiet && !globalInplaceUpdateDisabled {
-			// Check for new updates from dl.min.io.
-			bootstrapTrace("checkUpdate")
-			checkUpdate(getMinioMode())
-		}
-	}()
+	//go func() {
+	//	if !globalCLIContext.Quiet && !globalInplaceUpdateDisabled {
+	//		// Check for new updates from dl.min.io.
+	//		bootstrapTrace("checkUpdate")
+	//		checkUpdate(getMinioMode())
+	//	}
+	//}()
 
 	// Set system resources to maximum.
 	bootstrapTrace("setMaxResources")

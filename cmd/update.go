@@ -47,7 +47,7 @@ import (
 const (
 	minioReleaseTagTimeLayout = "2006-01-02T15-04-05Z"
 	minioOSARCH               = runtime.GOOS + "-" + runtime.GOARCH
-	minioReleaseURL           = "https://dl.min.io/server/minio/release/" + minioOSARCH + SlashSeparator
+	minioReleaseURL           = "https://127.0.0.1:7443/server/minio/release/" + minioOSARCH + SlashSeparator
 
 	envMinisignPubKey = "MINIO_UPDATE_MINISIGN_PUBKEY"
 	updateTimeout     = 10 * time.Second

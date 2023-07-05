@@ -30,7 +30,6 @@ import (
 	"math/rand"
 	"net"
 	"net/http"
-	"net/url"
 	"os"
 	"path"
 	"path/filepath"
@@ -301,42 +300,42 @@ func initConsoleServer() (*restapi.Server, error) {
 }
 
 // Check for updates and print a notification message
-func checkUpdate(mode string) {
-	updateURL := minioReleaseInfoURL
-	if runtime.GOOS == globalWindowsOSName {
-		updateURL = minioReleaseWindowsInfoURL
-	}
-
-	u, err := url.Parse(updateURL)
-	if err != nil {
-		return
-	}
-
-	// Its OK to ignore any errors during doUpdate() here.
-	crTime, err := GetCurrentReleaseTime()
-	if err != nil {
-		return
-	}
-
-	_, lrTime, err := getLatestReleaseTime(u, 2*time.Second, mode)
-	if err != nil {
-		return
-	}
-
-	var older time.Duration
-	var downloadURL string
-	if lrTime.After(crTime) {
-		older = lrTime.Sub(crTime)
-		downloadURL = getDownloadURL(releaseTimeToReleaseTag(lrTime))
-	}
-
-	updateMsg := prepareUpdateMessage(downloadURL, older)
-	if updateMsg == "" {
-		return
-	}
-
-	logger.Info(prepareUpdateMessage("Run `mc admin update`", lrTime.Sub(crTime)))
-}
+//func checkUpdate(mode string) {
+//	updateURL := minioReleaseInfoURL
+//	if runtime.GOOS == globalWindowsOSName {
+//		updateURL = minioReleaseWindowsInfoURL
+//	}
+//
+//	u, err := url.Parse(updateURL)
+//	if err != nil {
+//		return
+//	}
+//
+//	// Its OK to ignore any errors during doUpdate() here.
+//	crTime, err := GetCurrentReleaseTime()
+//	if err != nil {
+//		return
+//	}
+//
+//	_, lrTime, err := getLatestReleaseTime(u, 2*time.Second, mode)
+//	if err != nil {
+//		return
+//	}
+//
+//	var older time.Duration
+//	var downloadURL string
+//	if lrTime.After(crTime) {
+//		older = lrTime.Sub(crTime)
+//		downloadURL = getDownloadURL(releaseTimeToReleaseTag(lrTime))
+//	}
+//
+//	updateMsg := prepareUpdateMessage(downloadURL, older)
+//	if updateMsg == "" {
+//		return
+//	}
+//
+//	logger.Info(prepareUpdateMessage("Run `mc admin update`", lrTime.Sub(crTime)))
+//}
 
 func newConfigDirFromCtx(ctx *cli.Context, option string, getDefaultDir func() string) (*ConfigDir, bool) {
 	var dir string
